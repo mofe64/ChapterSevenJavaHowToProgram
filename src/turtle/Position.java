@@ -9,13 +9,25 @@ public class Position {
         this.columnPosition = columnPosition;
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
+    public int getRowPosition() {
+        return rowPosition;
     }
+
+    public int getColumnPosition() {
+        return columnPosition;
+    }
+
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        boolean isEqual = false;
+        if (obj.getClass() == this.getClass()) {
+            Position objectToCompareAgainst = (Position) obj;
+            if (objectToCompareAgainst.getColumnPosition() == this.columnPosition
+                    && objectToCompareAgainst.getRowPosition() == this.rowPosition) {
+                isEqual = true;
+            }
+        }
+        return isEqual;
     }
 }
