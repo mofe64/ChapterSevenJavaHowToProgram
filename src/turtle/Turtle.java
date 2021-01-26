@@ -45,12 +45,66 @@ public class Turtle {
         currentPosition = position;
     }
 
+    public Position getCurrentPosition() {
+        return currentPosition;
+    }
+
     public void move(SketchPad sketchPad, int numberOfMoves) {
+        numberOfMoves -= 1;
+        Position currentPosition = getCurrentPosition();
+        int currentColumn = currentPosition.getColumnPosition();
+        int currentRow = currentPosition.getRowPosition();
+        PenOrientation currentPenOrientation = getPen().getPenOrientation();
+        switch (currentPenOrientation) {
+            case PEN_UP -> moveWithPenUP(numberOfMoves);
+            case PEN_DOWN -> {
+                int[][] floor = sketchPad.getFloor();
+                switch (currentDirection) {
+                    case EAST -> {
+                        int positionAfterLoop = currentColumn + numberOfMoves;
+                        for (int column = currentColumn; column <= positionAfterLoop; column++) {
+                            floor[currentRow][column] = 1;
+                        }
+                        currentPosition.setColumnPosition(positionAfterLoop);
+                    }
+                    case WEST -> {
+                        int positionAfterLoop = currentColumn - numberOfMoves;
+                        for (int column = currentColumn; column >= positionAfterLoop; column--) {
+                            floor[currentRow][column] = 1;
+                        }
+                        currentPosition.setColumnPosition(positionAfterLoop);
+                    }
+                    case SOUTH -> {
+                        int positionAfterLoop = currentRow + numberOfMoves;
+                        for (int row = currentRow; row <= positionAfterLoop; row++) {
+                            floor[row][currentColumn] = 1;
+                        }
+                        currentPosition.setRowPosition(positionAfterLoop);
+                    }
+                    case NORTH -> {
+                        int positionAfterLoop = currentRow - numberOfMoves;
+                        for (int row = currentRow; row >= positionAfterLoop; row--) {
+                            floor[row][currentColumn] = 1;
+                        }
+                        currentPosition.setRowPosition(positionAfterLoop);
+                    }
+                }
+            }
+        }
 
     }
 
-    public Position getPosition() {
-        return new Position(0, 5);
+    private void moveWithPenUP(int numberOfMoves) {
+        Position currentPosition = getCurrentPosition();
+        int currentColumn = currentPosition.getColumnPosition();
+        int currentRow = currentPosition.getRowPosition();
+        switch (currentDirection) {
+            case EAST -> currentPosition.setColumnPosition(currentColumn + numberOfMoves);
+            case SOUTH -> currentPosition.setRowPosition(currentRow + numberOfMoves);
+            case WEST -> currentPosition.setColumnPosition(currentColumn - numberOfMoves);
+            case NORTH -> currentPosition.setRowPosition(currentRow - numberOfMoves);
+        }
     }
+
 
 }

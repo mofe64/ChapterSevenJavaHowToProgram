@@ -23,11 +23,20 @@ public class Position {
         boolean isEqual = false;
         if (obj.getClass() == this.getClass()) {
             Position objectToCompareAgainst = (Position) obj;
-            if (objectToCompareAgainst.getColumnPosition() == this.columnPosition
-                    && objectToCompareAgainst.getRowPosition() == this.rowPosition) {
+            boolean isSameCoordinate = objectToCompareAgainst.getColumnPosition() == this.columnPosition
+                    && objectToCompareAgainst.getRowPosition() == this.rowPosition;
+            if (isSameCoordinate) {
                 isEqual = true;
             }
         }
         return isEqual;
+    }
+
+    public void setColumnPosition(int columnPosition) {
+        this.columnPosition = columnPosition;
+    }
+
+    public void setRowPosition(int rowPosition) {
+        this.rowPosition = rowPosition;
     }
 }
