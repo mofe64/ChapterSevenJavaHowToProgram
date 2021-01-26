@@ -36,8 +36,9 @@ class TurtleTest {
         turtle.getPen().setPenOrientation(PenOrientation.PEN_UP);
         assertEquals(PenOrientation.PEN_UP, turtle.getPen().getPenOrientation());
     }
+
     @Test
-    void turtleCanTurnRight(){
+    void turtleCanTurnRight() {
         turtle.setCurrentDirection(CurrentDirection.EAST);
         turtle.turnRight();
         assertEquals(CurrentDirection.SOUTH, turtle.getCurrentDirection());
@@ -50,7 +51,7 @@ class TurtleTest {
     }
 
     @Test
-    void turtleCanTurnLeft(){
+    void turtleCanTurnLeft() {
         turtle.setCurrentDirection(CurrentDirection.EAST);
         turtle.turnLeft();
         assertEquals(CurrentDirection.NORTH, turtle.getCurrentDirection());
@@ -63,10 +64,13 @@ class TurtleTest {
     }
 
     @Test
-    void turtleCanMoveEastWardOnASketchPad(){
+    void turtleCanMoveEastWardOnASketchPad() {
         turtle.setCurrentDirection(CurrentDirection.EAST);
+        turtle.getPen().setPenOrientation(PenOrientation.PEN_UP);
         SketchPad sketchPad = new SketchPad();
+        turtle.setCurrentPosition(new Position(0, 0));
         turtle.move(sketchPad, 5);
+        assertEquals(new Position(0,5), turtle.getPosition());
     }
 
 }

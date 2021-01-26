@@ -3,6 +3,7 @@ package turtle;
 public class Turtle {
     private Pen pen;
     private CurrentDirection currentDirection;
+    private Position currentPosition;
 
     public Turtle(Pen pen) {
         this.pen = pen;
@@ -39,7 +40,16 @@ public class Turtle {
         }
     }
 
+    public void setCurrentPosition(Position position) {
+        currentPosition = position;
+    }
+
     public void move(SketchPad sketchPad, int numberOfMoves) {
 
     }
+
+    public Position getPosition() {
+        return currentPosition;
+    }
+
 }
