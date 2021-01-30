@@ -58,7 +58,7 @@ public class Turtle {
         switch (currentPenOrientation) {
             case PEN_UP -> moveWithPenUP(numberOfMoves);
             case PEN_DOWN -> {
-                int[][] floor = sketchPad.getFloor();
+                char[][] floor = sketchPad.getFloor();
                 switch (currentDirection) {
                     case EAST -> {
                         int positionAfterLoop = currentColumn + numberOfMoves;
@@ -106,5 +106,7 @@ public class Turtle {
         }
     }
 
-
+    public void displayFloor(SketchPad sketchPad) {
+        sketchPad.displayFloor();
+    }
 }

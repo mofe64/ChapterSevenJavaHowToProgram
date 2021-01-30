@@ -72,9 +72,14 @@ class TurtleTest {
         SketchPad sketchPad = new SketchPad(20, 20);
         turtle.setCurrentPosition(new Position(0, 0));
         turtle.move(sketchPad, 5);
+        Position position1 = turtle.getCurrentPosition();
+        Position position2 = new Position(0, 4);
+        System.out.println(position1.equals(position2));
         assertEquals(new Position(0, 4), turtle.getCurrentPosition());
         turtle.move(sketchPad, 2);
         assertEquals(new Position(0, 5), turtle.getCurrentPosition());
+
+
     }
 
     @Test
@@ -149,16 +154,37 @@ class TurtleTest {
         }
         assertEquals(new Position(4, 0), turtle.getCurrentPosition());
     }
+
     @Test
-    void turtleCanWriteOnSketchPadWhileFacingNorth(){
+    void turtleCanWriteOnSketchPadWhileFacingNorth() {
         turtle.setCurrentDirection(CurrentDirection.NORTH);
         turtle.getPen().setPenOrientation(PenOrientation.PEN_DOWN);
-        turtle.setCurrentPosition(new Position(10,0));
+        turtle.setCurrentPosition(new Position(10, 0));
         int numberOfSteps = 5;
-        turtle.move(sketchPad,numberOfSteps);
-        for (int row = 10; row > numberOfSteps; row--){
+        turtle.move(sketchPad, numberOfSteps);
+        for (int row = 10; row > numberOfSteps; row--) {
+            //System.out.println(sketchPad.getFloor()[row][0] == 1);
             assertEquals(1, sketchPad.getFloor()[row][0]);
         }
         assertEquals(new Position(6, 0), turtle.getCurrentPosition());
     }
+
+    @Test
+    void turtleCanDisplayFloor() {
+        turtle.setCurrentDirection(CurrentDirection.EAST);
+        turtle.getPen().setPenOrientation(PenOrientation.PEN_DOWN);
+        turtle.setCurrentPosition(new Position(0, 0));
+        int numberOfSteps = 5;
+        turtle.move(sketchPad, numberOfSteps);
+        turtle.turnRight();
+        turtle.move(sketchPad, numberOfSteps);
+        turtle.turnRight();
+        turtle.move(sketchPad, numberOfSteps);
+        turtle.turnRight();
+        turtle.move(sketchPad, numberOfSteps);
+        turtle.turnRight();
+        turtle.move(sketchPad, numberOfSteps);
+        turtle.displayFloor(sketchPad);
+    }
+
 }

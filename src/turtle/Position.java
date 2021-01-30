@@ -21,6 +21,7 @@ public class Position {
     @Override
     public boolean equals(Object obj) {
         boolean isEqual = false;
+        System.out.println("class is " + obj.getClass());
         if (obj.getClass() == this.getClass()) {
             Position objectToCompareAgainst = (Position) obj;
             boolean isSameCoordinate = objectToCompareAgainst.getColumnPosition() == this.columnPosition
